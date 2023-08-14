@@ -1,0 +1,136 @@
+<script>
+
+  function Mensagem(){
+     
+     this.Executar = function (){
+  
+     var Largura = window.innerWidth;
+     var Altura = window.innerHeigth;
+     
+     var Objetos = document.getElementById("Componentes");
+     var Caixa = document.getElementById("CaixaMensagem");
+     
+     Objetos.style.display = "block";
+     Objetos.style.heigth = Altura+ "px";
+     
+     Caixa.style.left = (Largura/2) - (550 * .5)+"px";
+     Caixa.style.top = "70px";
+     Caixa.style.display = "block";
+     
+      document.getElementById("TituloMsg").innerHTML = "AVISO";
+      document.getElementById("CorpoMsg").innerHTML = "DESEJA REALMENTE EXCLUIR?";
+      document.getElementById("RodapeMsg").innerHTML = '<button class = "green" onclick= "Confirm.Sim()"> <b> <font color= "black" size = "5">Sim</font></b></button><button class = "red" onclick= "Confirm.Nao()"> <b><font color= "black"  size = "5">Não</font></b></button>';                                                                                                               
+         
+     }
+     
+     this.Nao = function (){   
+     Fechar();   
+     }
+     
+     
+     this.Sim = function (){
+     
+      document.getElementById("RodapeMsg").innerHTML = '<button onclick= "Fechar()"> <b> <font color= "black" size = "5">Fechar</font></b></button>';
+      
+     var criteriopesquisa = document.getElementById("Campo1").value;
+     
+     if (criteriopesquisa.trim().length ==0){ 
+      document.getElementById("CorpoMsg").innerHTML = "Campo vazio. Preencha o nº do empenho";
+     
+      }else{
+           
+         google.script.run.withSuccessHandler(Carregar).ExcluirDados(criteriopesquisa);
+    
+          function Carregar(retorno){  
+     
+            if (retorno != "Não encontrado!"){
+  
+                document.getElementById("CorpoMsg").innerHTML = "EXCLUÍDO COM SUCESSO!";
+  
+             /* Limpar();*/
+  
+             }else{ 
+  
+                document.getElementById("CorpoMsg").innerHTML = " EMPENHO NÃO ENCONTRADO! Isto ocorre quando o empenho não existe ou o ateste ainda não foi realizado. Caso o material/prestação de serviço tenha sido entregue/prestado, solicitamos que envie a nota fiscal e o comprovante de entrega/prestação de serviço realizado para : compras.proppi@id.uff.br";
+  
+              }    
+         }
+     
+       }
+      }
+     
+     }   
+     
+  var Confirm = new Mensagem();
+  
+  function caixaMsgbox(m){
+  
+     var Largura = window.innerWidth;
+     var Altura = window.innerHeigth;
+     
+     var Objetos = document.getElementById("Componentes");
+     var Caixa = document.getElementById("CaixaMensagem");
+     
+     Objetos.style.display = "block";
+     Objetos.style.heigth = Altura+ "px";
+     
+     Caixa.style.left = (Largura/2) - (550 * .5)+"px";
+     Caixa.style.top = "70px";
+     Caixa.style.display = "block";        
+  
+    document.getElementById("TituloMsg").innerHTML = "AVISO"; 
+    document.getElementById("CorpoMsg").innerHTML = m;
+    document.getElementById("RodapeMsg").innerHTML = '<button class = "orange" onclick= " Fechar()"> <b> <font color= "black" size = "5">Fechar</font></b></button>';
+  
+  }
+  
+  function Fechar(){
+  document.getElementById("CaixaMensagem").style.display = "none";
+  document.getElementById("Componentes").style.display = "none";
+  }
+  
+  
+  document.getElementById("btnpesquisar").addEventListener("click", Pesquisar);
+   
+    function Pesquisar(){  
+    
+    var criteriopesquisa = document.getElementById("Campo1").value;
+    
+    if (criteriopesquisa.trim().length == 0){  
+     var m = "Campo vazio. Preencha o nº do empenho";
+     caixaMsgbox(m);
+     return false;
+    };  
+    
+    google.script.run.withSuccessHandler(Carregar).PesquisarDados(criteriopesquisa);
+    
+    function Carregar(retorno){  
+     
+    if (retorno != "Não encontrado!"){
+    
+    document.getElementById("Campo1").value = retorno[0]
+    M.updateTextFields();
+    document.getElementById("Campo2").value = retorno[1]
+    M.updateTextFields();
+    document.getElementById("Campo3").value = retorno[2]
+    M.updateTextFields();
+    document.getElementById("Campo4").value = retorno[3]
+    M.updateTextFields();
+    document.getElementById("Campo5").value = retorno[4]
+    M.updateTextFields();
+    document.getElementById("Campo6").value = retorno[5]
+    M.updateTextFields();
+    document.getElementById("Campo7").value = retorno[6]
+    M.updateTextFields();
+    document.getElementById("Campo8").value = retorno[7]
+    M.updateTextFields();
+  
+    }else{
+    
+     var m = "EMPENHO NÃO ENCONTRADO! Isto ocorre quando o empenho não existe ou o ateste ainda não foi realizado. Caso o material/prestação de serviço tenha sido entregue/prestado, solicitamos que envie a nota fiscal e o comprovante de entrega/prestação de serviço realizado para : compras.proppi@id.uff.br";
+     caixaMsgbox(m);   
+    }
+      }
+    }
+    
+  </script>
