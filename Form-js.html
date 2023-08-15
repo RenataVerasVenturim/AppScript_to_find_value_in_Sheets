@@ -51,7 +51,7 @@
   
              }else{ 
   
-                document.getElementById("CorpoMsg").innerHTML = " EMPENHO NÃO ENCONTRADO! Isto ocorre quando o empenho não existe ou o ateste ainda não foi realizado. Caso o material/prestação de serviço tenha sido entregue/prestado, solicitamos que envie a nota fiscal e o comprovante de entrega/prestação de serviço realizado para : compras.proppi@id.uff.br";
+                document.getElementById("CorpoMsg").innerHTML = " EMPENHO NÃO ENCONTRADO! Isto ocorre quando o empenho não existe, ou o ateste (confirmação de recebimento) por parte do curso ainda não foi realizado. Caso tenha sido fornecido o material ou serviço, solicitamos que envie a nota fiscal e o comprovante de entrega/prestação de serviço realizado para: compras.proppi@id.uff.br";
   
               }    
          }
@@ -103,34 +103,24 @@
     };  
     
     google.script.run.withSuccessHandler(Carregar).PesquisarDados(criteriopesquisa);
+
+}
     
-    function Carregar(retorno){  
-     
-    if (retorno != "Não encontrado!"){
-    
-    document.getElementById("Campo1").value = retorno[0]
-    M.updateTextFields();
-    document.getElementById("Campo2").value = retorno[1]
-    M.updateTextFields();
-    document.getElementById("Campo3").value = retorno[2]
-    M.updateTextFields();
-    document.getElementById("Campo4").value = retorno[3]
-    M.updateTextFields();
-    document.getElementById("Campo5").value = retorno[4]
-    M.updateTextFields();
-    document.getElementById("Campo6").value = retorno[5]
-    M.updateTextFields();
-    document.getElementById("Campo7").value = retorno[6]
-    M.updateTextFields();
-    document.getElementById("Campo8").value = retorno[7]
-    M.updateTextFields();
-  
-    }else{
-    
-     var m = "EMPENHO NÃO ENCONTRADO! Isto ocorre quando o empenho não existe ou o ateste ainda não foi realizado. Caso o material/prestação de serviço tenha sido entregue/prestado, solicitamos que envie a nota fiscal e o comprovante de entrega/prestação de serviço realizado para : compras.proppi@id.uff.br";
-     caixaMsgbox(m);   
+    function Carregar(resultados) {
+  var campoResultado = document.getElementById("Campo2");
+  campoResultado.value = ""; // Limpa o campo de resultado
+
+  if (resultados.length > 0 && resultados[0] !== "Não encontrado!") {
+    for (var i = 0; i < resultados.length; i++) {
+      campoResultado.value += "NOTA FISCAL:" + resultados[i].Campo3 +"\nEMPENHO:" + resultados[i].Campo1 + "\nPROCESSO:" + resultados[i].Campo2 + "\nSTATUS:" + resultados[i].Campo4 + "-"+resultados[i].Campo8+ "\nORDEM BANCÁRIA:" + resultados[i].Campo5 + "\nDATA DO PAGAMENTO:" + resultados[i].Campo6 + "\nOBSERVAÇÕES:" + resultados[i].Campo7 +"\n\n";
     }
-      }
-    }
+    M.updateTextFields();
+  } else {
+    campoResultado.value = "EMPENHO NÃO ENCONTRADO! Isto ocorre quando o empenho não existe, ou o ateste (confirmação de recebimento) por parte do curso ainda não foi realizado. Caso tenha sido fornecido o material ou serviço, solicitamos que envie a nota fiscal e o comprovante de entrega/prestação de serviço realizado para: compras.proppi@id.uff.br";
+  }
+}
+
+    
+    
     
   </script>

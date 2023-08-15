@@ -61,35 +61,24 @@
             </picture>      
         <br>
         <br>
-
+        
           <label id = "Label1">Número do Empenho:</label>
           <input id="Campo1" type="text" placeholder="Digite no formato '2022NE000402'" minlength="12" maxlength="12" required>
 
           <p><button id = "btnpesquisar">CONSULTAR</button></p>
 
-          <ul id="ul_lista"> 
-          <li class="linhalista"><label id = "Label2">Processo:</label>
-              <br><input id="Campo2" type="text" disabled>
-          </li>
-          <li class="linhalista"><label id = "Label3">Nota fiscal:</label>            
-              <br><input id="Campo3" type="text" disabled>
-          </li>
-          <li class="linhalista"><label id = "Label4">Status:</label>
-              <br><input id="Campo4" type="text" disabled>
-              <br><textarea id="Campo8" rows="4" cols="50" disabled></textarea> 
-          </li>
-          <li class="linhalista"><label id = "Label5">Ordem bancária (pagamento):</label>
-              <br><input id="Campo5" type="text" disabled>
-          </li> 
-          <li class="linhalista"><label id = "Label6">Data do pagamento:</label>
-              <br><input id="Campo6" type="text" disabled>  
-          </li> 
-          <li class="linhalista"><label id = "Label7">Observações:</label>
-              <br><textarea id="Campo7" rows="4" cols="50" disabled></textarea>
-          </li>
-          </ul>
-            
-      </div>        
+          <div id="resultadoCriterioPesquisa">
+              <label id = "Label2">Resultado:</label>
+              <br><textarea id="Campo2" type="text"  disabled></textarea>
+          </div>
+          <button id="btn-copiar">copiar</button>
+
+
+        <div id="versao">
+          <i>By Renata Veras Venturim</i>
+        </div>
+        
+      </div>    
 
              <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
 
@@ -109,5 +98,29 @@
 
 </footer>
 
+<script>
+        var botaoCopiar=document.getElementById('btn-copiar');
+        var conteudoDiv=document.getElementById('resultadoCriterioPesquisa');
+
+        botaoCopiar.addEventListener('click',()=>{
+
+        const range = document.createRange();
+        range.selectNodeContents(conteudoDiv);
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+console.log('Texto selecionado:', selection.toString());
+
+  document.execCommand('copy');
+  
+  console.log('Texto copiado para a área de transferência');
+        
+        botaoCopiar.textContent='copiado';
+        botaoCopiar.style.background='gray';
+        
+  console.log('Cor do botão alterada');
+            });
+</script>
 </body>
 </html>
