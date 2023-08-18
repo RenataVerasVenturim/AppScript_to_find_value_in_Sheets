@@ -1,4 +1,4 @@
-<!--
+<!-- Criado no VS CODE via clasp integrado ao App Script
   Direitos Autorais (c) 2023 Renata Veras Venturim
 
   Licença MIT
@@ -80,9 +80,11 @@
         </p>
             <br>
             <picture>
+            
             <source media="(max-width:750px)" srcset="https://github.com/RenataVerasVenturim/Interface_usuario/blob/main/iconep.jpg?raw=true" type="image/jpg">
             <source media="(max-width:1050px)" srcset="https://github.com/RenataVerasVenturim/Interface_usuario/blob/main/iconep.jpg?raw=true" type="image/jpg">                
-            <img src="https://github.com/RenataVerasVenturim/Interface_usuario/blob/main/iconep.jpg?raw=true" alt="buscador de empenho">         
+            <img src="https://github.com/RenataVerasVenturim/Interface_usuario/blob/main/iconep.jpg?raw=true" alt="buscador de empenho"> 
+          
             </picture>      
         <br>
         <br>
@@ -100,7 +102,7 @@
 
 
         <div id="versao">
-          <i>By Renata Veras Venturim</i>
+          <i>Versão beta</i>
         </div>
         
       </div>    
@@ -135,11 +137,8 @@
         const selection = window.getSelection();
         selection.removeAllRanges();
         selection.addRange(range);
-console.log('Texto selecionado:', selection.toString());
 
-  document.execCommand('copy');
-  
-  console.log('Texto copiado para a área de transferência');
+        document.execCommand('copy');
         
         botaoCopiar.textContent='copiado';
         botaoCopiar.style.background='gray';
