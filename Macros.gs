@@ -39,7 +39,7 @@ function PesquisarDados(criteriopesquisa){
   var resultados = [];
 
   for(var linha = 0; linha<dados.length; linha++){
-    if(dados[linha][colunaID].toString().toLowerCase() == criteriopesquisa.toString().toLowerCase() || dados[linha][1].toString().toLowerCase() == criteriopesquisa.toString().toLowerCase()){
+    if(dados[linha][colunaID].toString().trim().toUpperCase() == criteriopesquisa.trim().toString().toUpperCase() || dados[linha][1].toString().toUpperCase() == criteriopesquisa.toString().trim().toUpperCase()){
       var Carregar = {};
 
       Carregar.Campo1 = dados[linha][colunaID];
