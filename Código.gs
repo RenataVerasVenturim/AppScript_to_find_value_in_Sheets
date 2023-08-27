@@ -23,8 +23,7 @@
   OU DE OUTRA FORMA, DECORRENTES DE, OU EM CONEXÃO COM O SOFTWARE OU O USO OU OUTRAS NEGOCIAÇÕES NO PROGRAMAS.
 */
 
-function doGet(e) {
-  
+function doGet(e) {  
   var template=HtmlService.createTemplateFromFile("Principal");
   
   return template.evaluate()
@@ -33,13 +32,6 @@ function doGet(e) {
     .addMetaTag('viewport', 'width=device-width,initial-scale=1');
 }
 
-
 function Chamar(Arquivo){
-
-  return HtmlService.createHtmlOutputFromFile(Arquivo).getContent();
-  
+  return HtmlService.createHtmlOutputFromFile(Arquivo).getContent(); 
 }
-
-
-
-
