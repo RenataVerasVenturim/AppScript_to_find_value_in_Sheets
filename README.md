@@ -1,7 +1,7 @@
-# AppScript_to_find_value_in_Sheets
-Html, css e js no AppScript para encontrar valores em uma Planilha Sheets
+# AppScript_to_find_value_in_Sheets_and_chatbot
+Html, css e js no AppScript para encontrar valores em uma Planilha Sheets e retornar em uma interface de usuário. Inclusão de um um chatBot estático.
 
-<img src="https://github.com/RenataVerasVenturim/AppScript_to_find_value_in_Sheets/assets/129551549/d69c0fd7-0a03-447d-8466-0c79b6cae78e">
+<img src="https://github.com/RenataVerasVenturim/AppScript_to_find_values_in_Sheets_and_chatbot/assets/129551549/856c5635-b379-4b0d-9d73-98e3ce1ae90f">
 
 <h2>
  Softwares Necessários:
