@@ -114,9 +114,6 @@
   document.getElementById("Componentes").style.display = "none";
   }
   
-  
-  
-  // ... (código anterior)
 
   var botaoPesquisar = document.getElementById("btnpesquisar");
   botaoPesquisar.addEventListener("click", Pesquisar);
@@ -154,7 +151,7 @@
 
     if (resultados.length > 0 && resultados[0] !== "Não encontrado!") {
       for (var i = 0; i < resultados.length; i++) {
-        campoResultado.value += "NOTA FISCAL:" + resultados[i].Campo3 +"\nEMPENHO:" + resultados[i].Campo1 + "\nPROCESSO:" + resultados[i].Campo2 + "\nSTATUS:" + resultados[i].Campo4 + "-"+resultados[i].Campo8+ "\nORDEM BANCÁRIA:" + resultados[i].Campo5 + "\nDATA DO PAGAMENTO:" + resultados[i].Campo6 + "\nOBSERVAÇÕES:" + resultados[i].Campo7 +"\n\n";
+        campoResultado.value += "NOTA FISCAL:" + resultados[i].Campo3 +"\nEMPENHO:" + resultados[i].Campo1 + "\nPROCESSO:" + resultados[i].Campo2 + "\nSTATUS:" + /*resultados[i].Campo4 + "-"+*/ resultados[i].Campo8+ "\nORDEM BANCÁRIA:" + resultados[i].Campo5 + "\nDATA DO PAGAMENTO:" + resultados[i].Campo6 + "\nOBSERVAÇÕES:" + resultados[i].Campo7 +"\n\n";
       }
       M.updateTextFields();
     } else {
@@ -164,8 +161,100 @@
     finalizarCarregamento();
   }
 
+// Função para exibir o chatbox
+function exibirChatbox() {
+    var Largura = window.innerWidth;
 
+    var Objetos = document.getElementById("chat-container");
+
+    Objetos.style.display = "block";
+    Objetos.style.height = "300px";
+    Objetos.style.width = "300px"; 
+  }
+
+  // Event listener para chamar a função exibirChatbox quando necessário
+  var chatboxButton = document.getElementById("AbrirChatbox");
+  chatboxButton.addEventListener("click", function() {
+    exibirChatbox();
+  });
+
+ function FecharChatBox() {
+  var chatContainer = document.getElementById("chat-container");
+  var chatIcon = document.getElementById("chat-icon");
+  chatContainer.style.display = "none";
+  chatIcon.style.display = "flex"; 
+}
     
-    
-    
-  </script>
+        var botaoCopiar=document.getElementById('btn-copiar');
+        var conteudoDiv=document.getElementById('resultadoCriterioPesquisa');
+
+        botaoCopiar.addEventListener('click',()=>{
+
+        const range = document.createRange();
+        range.selectNodeContents(conteudoDiv);
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        document.execCommand('copy');
+        
+        botaoCopiar.textContent='copiado';
+        botaoCopiar.style.background='gray';
+        
+  console.log('Cor do botão alterada');
+            });
+// Função para exibir o chatbox
+this.Sim = function () {
+  document.getElementById("chat-container").innerHTML = '<button onclick="Fechar()"> <b> <font color="black" size="5">Fechar</font></b></button>';
+}
+
+// Event listener para chamar a função exibirChatbox quando necessário
+var chatboxButton = document.getElementById("AbrirChatbox");
+chatboxButton.addEventListener("click", function() {
+  exibirChatbox();
+});
+
+  const chatMessages = document.getElementById('chat-messages');
+  const userInput = document.getElementById('user-input');
+  const sendButton = document.getElementById('send-button');
+  const chatIcon = document.getElementById('chat-icon');
+  const chatContainer = document.getElementById('chat-container');
+
+
+const responses = {
+  'O que significa empenho não encontrado?':'Se o resultado foi "EMPENHO NÃO ENCONTRADO!(...)" , isso significa que o empenho digitado não existe,ou a UFF ainda não recebeu a nota fiscal enviada pelo curso recebedor, confirmando a entrega/ prestação de serviços. Neste caso, se estiver fora do prazo legal do recebimento definitivo do objeto (Art 73, II,b,§ 3º, 8666/93), o fornecedor pode enviar a nota fiscal e comprovante de recebimento para: compras.proppi@id.uff.br que iremos realizar cobrança junto aos recebedores e averiguar o ocorrido. Solicitamos que antes verifique se digitou corretamente o nº do empenho, no formato 2022NE000422 (12 dígitos).',
+  'Quando irei receber o pagamento?': 'Conforme a legislação vigente, o pagamento é realizado entre 5 a 30 dias do ateste  (confirmação do recebimento/ prestação de serviços)(ANEXO IV , ART 4,INSTRUÇÃO NORMATIVA 5 DE 26 DE MAIO DE 2017). Quanto ao ateste , o prazo legal é de até 90 dias (Art 73,b,§ 3º, 8666/93) para o recebimento definitivo do objeto. No entanto, não se preocupe, caso tenha entregue ou prestado o serviço e os prazos expiraram, poderá nos enviar a nota fiscal e o comprovante de recebimento que iremos dar maior celeridade ao seu caso. E mail: compras.proppi@id.uff.br',
+  'Qual o contato do setor responsável pelo pagamento?': 'Nosso e mail é: compras.proppi@id.uff.br',
+  'Quais são as etapas do pagamento referente a um empenho?': 'As etapas são:"Nota fiscal recebida", "Atestado", "Liquidado", "Pago"',
+  'Não encontrei minha dúvida aqui': 'Lamentamos por isso. Informamos que estamos em processo de desenvolvimento e , à medida que verificarmos novas demandas recorrentes, iremos implementar em nosso chatBox. Solicitamos que encaminhe sua dúvida para nosso e mail: compras.proppi@id.uff.br com o assunto:"Dúvida sobre liquidação e pagamento de NFE - (TEMA_DA_DÚVIDA)"',
+  'Obrigado(a). Até logo!': 'Até logo! Qualquer dúvida, estou aqui.'
+};
+
+chatIcon.addEventListener('click', () => {
+  chatContainer.style.display = 'block';
+  chatIcon.style.display = 'none';
+});
+
+sendButton.addEventListener('click', () => {
+  const userMessage = userInput.value;
+  if (userMessage === '') return;
+
+  appendMessage('Você', userMessage);
+  const response = responses[userMessage] || 'Desculpe, não entendi.';
+
+  setTimeout(() => {
+    appendMessage('Chatbot', response);
+  }, 500);
+
+  userInput.value = '';
+});
+
+function appendMessage(sender, message) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = 'message';
+  messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+  chatMessages.appendChild(messageDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+</script>
