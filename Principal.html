@@ -26,37 +26,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <!--sÃO IGNORADOS DENTRO DO APP SCRIPT:
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="description" content="Site do setor PROPPI da Universidade Federal Fluminense - UFF">
-    <link rel="shortcut icon" href="faviconuff.ico" type="image/x-icon">
-    <title>Situação de Empenho</title>-->
-        
          <base target="_top">  
 
      <?!=Chamar("Estilo") ?>  
 
 </head>
 <body>
-   
-
     <div id = "Componentes"></div>
     <div id = "CaixaMensagem">
-
     <div>
     <div id = "TituloMsg"></div>
     <div id = "CorpoMsg"></div>
     <div id = "RodapeMsg"></div>
     </div>
     </div>
-   
+
     <header>
         <nav>
             
             <img src="https://github.com/RenataVerasVenturim/Interface_usuario/blob/main/logo.png?raw=true" alt="logo uff" width="100" height="100">
-
 <!--
             <button id="btn-menu" aria-label="Abrir menu">
             <svg width="24" height="24" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,13 +77,23 @@
         <br>
         <br>
         
-          <label id = "Label1">Número do Empenho:</label>
+          <label for = "Campo1">Número do Empenho:</label>
           <input id="Campo1" type="text" placeholder="Digite no formato '2022NE000402'" minlength="12" maxlength="12" required>
 
           <p><button id = "btnpesquisar">CONSULTAR</button></p>
 
+          <div id="content">
+            <ol class="progress-bar">
+              <li class="is-active"><span>NF recebida</span></li>  
+              <li class="is-active"><span>Atestado</span></li>
+              <li class="is-active"><span>Liquidado</span></li>
+              <li class="is-active"><span>Pago</span></li>  
+            </ol>
+          </div>
+
           <div id="resultadoCriterioPesquisa">
-              <label id = "Label2">Resultado:</label>
+              <label for = "Campo2">Resultado:</label>
+
               <br><textarea id="Campo2" type="text"  disabled></textarea>
           </div>
           <button id="btn-copiar">copiar</button>
@@ -106,10 +104,27 @@
         </div>
         
       </div>    
+      <div id="chat-icon">
+        <span id="AbrirChatbox">&#128172;</span>
+        </div>
+        <div id="chat-container">ChatBox
+        <div id="chat-messages"></div>
+          <select id="user-input">
+            <option value="" disabled selected>Escolha uma opção...</option>
+            <option value="O que significa empenho não encontrado?">O que significa empenho não encontrado?</option>
+            <option value="Quando irei receber o pagamento?">Quando irei receber o pagamento?</option>
+            <option value="Quais são as etapas do pagamento referente a um empenho?">Quais são as etapas do pagamento referente a um empenho?</option>
+            <option value="Qual o contato do setor responsável pelo pagamento?">Qual o contato do setor responsável pelo pagamento?</option>
+            <option value="Não encontrei minha dúvida aqui">Não encontrei minha dúvida aqui</option>
+            <option value="Obrigado(a). Até logo!">Obrigado(a). Até logo!</option>
 
-             <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
+          </select>
+          <button id="send-button">Enviar</button>
+          <button id="FecharChatboxButton" onclick="FecharChatBox()">Fechar</button>
+    
+      </div>
 
-         <?!=Chamar("Form-js")?>     
+     <?!=Chamar("Form-js")?>     
 
     </main>
 
@@ -125,26 +140,5 @@
 
 </footer>
 
-<script>
-        var botaoCopiar=document.getElementById('btn-copiar');
-        var conteudoDiv=document.getElementById('resultadoCriterioPesquisa');
-
-        botaoCopiar.addEventListener('click',()=>{
-
-        const range = document.createRange();
-        range.selectNodeContents(conteudoDiv);
-
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-
-        document.execCommand('copy');
-        
-        botaoCopiar.textContent='copiado';
-        botaoCopiar.style.background='gray';
-        
-  console.log('Cor do botão alterada');
-            });
-</script>
 </body>
 </html>
